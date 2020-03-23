@@ -1,0 +1,5 @@
+2020-03-23 11:25:36 [main] pkg.Main.main()
+ERROR: this is an error message
+2020-03-23 11:25:36 [main] pkg.Main.main()
+ERROR: something is wrong!: java.lang.RuntimeException: omg
+	at pkg.Main.main(Main.java:16)
