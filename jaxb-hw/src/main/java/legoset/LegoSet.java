@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.net.URL;
+
 import java.time.Year;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +14,7 @@ import java.util.Set;
 @XmlRootElement
 public class LegoSet {
     private String name,theme,subtheme;
+    private String url;
     private int pieces;
 
     @XmlJavaTypeAdapter(YearAdapter.class)
@@ -24,7 +25,8 @@ public class LegoSet {
     @XmlElementWrapper(name = "minifigs")
     @XmlElement(name = "minifig")
     private List<Minifig> minifigs;
-    private URL url;
-
     private List<Weight> weight;
+
+    @XmlAttribute
+    private String number;
 }
