@@ -30,11 +30,4 @@ public class User {
     private LocalDate dob;
     private boolean enabled;
 
-
-    public Long getId() {
-        return id;
-    }
-    public String getUsername() {
-        return username;
-    }
 }
