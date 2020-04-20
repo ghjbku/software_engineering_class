@@ -1,6 +1,5 @@
 package person;
 
-import com.github.javafaker.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

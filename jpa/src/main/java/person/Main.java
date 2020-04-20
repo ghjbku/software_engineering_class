@@ -10,26 +10,27 @@ import java.time.Year;
 import java.time.ZoneId;
 
 public class Main {
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-hw");
+    private static EntityManagerFactory emf;
     private static Faker faker = new Faker();
 
     private static void createPersons(int db){
+        emf = Persistence.createEntityManagerFactory("jpa-hw");
         EntityManager em = emf.createEntityManager();
 
-        for (int i=0;i<db;i++) {
+
 
             try
             {
-                em.getTransaction().begin();
-                 em.persist(randomPerson());
-                em.getTransaction().commit();
+                for (int i=0;i<db;i++) {
+                    em.getTransaction().begin();
+                    em.persist(randomPerson());
+                    em.getTransaction().commit();
+                }
             }
             finally
             {
                 em.close();
             }
-
-        }
     }
 
     private static Person randomPerson(){
@@ -37,23 +38,18 @@ public class Main {
                 .name(faker.name().fullName())
                 .dob(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
                 .gender(faker.options().option(Person.Gender.class))
-                .address(faker.address())
+                .address(new Address(faker.address().country(),faker.address().state(),faker.address().city(),faker.address().streetAddress(),faker.address().zipCode()))
                 .email(faker.internet().emailAddress())
                 .profession(faker.company().profession())
                 .build();
-        System.out.println(person.getAddress().fullAddress());
+        System.out.println(person);
         return person;
 
     }
 
 
     public static void main(String[] args) {
-        createPersons(2);
-
-      /*  for (int i=0;i<db;i++) {
-
-        }
-      */
+        createPersons(10);
 
 
 
