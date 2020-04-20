@@ -10,22 +10,27 @@ import java.time.Year;
 import java.time.ZoneId;
 
 public class Main {
-    //private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-example");
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-hw");
     private static Faker faker = new Faker();
 
-   /* private void createPersons(){
+    private void createPersons(int db){
         EntityManager em = emf.createEntityManager();
 
-            try {
-                em.getTransaction().begin();
-               // em.persist();
+        for (int i=0;i<db;i++) {
 
+            try
+            {
+                em.getTransaction().begin();
+                 em.persist(randomPerson());
                 em.getTransaction().commit();
-            } finally {
+            }
+            finally
+            {
                 em.close();
             }
 
-    }*/
+        }
+    }
 
     private static Person randomPerson(){
         Person person = Person.builder()
@@ -36,14 +41,13 @@ public class Main {
                 .email(faker.internet().emailAddress())
                 .profession(faker.company().profession())
                 .build();
-        System.out.println(person);
+        System.out.println(person.getAddress().fullAddress());
         return person;
 
     }
 
 
     public static void main(String[] args) {
-        randomPerson();
 
       /*  for (int i=0;i<db;i++) {
 
