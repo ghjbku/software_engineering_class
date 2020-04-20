@@ -13,7 +13,7 @@ public class Main {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-hw");
     private static Faker faker = new Faker();
 
-    private void createPersons(int db){
+    private static void createPersons(int db){
         EntityManager em = emf.createEntityManager();
 
         for (int i=0;i<db;i++) {
@@ -48,6 +48,7 @@ public class Main {
 
 
     public static void main(String[] args) {
+        createPersons(2);
 
       /*  for (int i=0;i<db;i++) {
 
