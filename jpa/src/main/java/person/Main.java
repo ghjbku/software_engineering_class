@@ -30,6 +30,7 @@ public class Main {
             finally
             {
                 em.close();
+                emf.close();
             }
     }
 
