@@ -1,5 +1,5 @@
 javafx-calculator-example
 =========================
-ac,+/- és flaotpoint support
+ac,+/- és floatpoint support
 
 A basic calculator written in [JavaFX](https://openjfx.io/).  
