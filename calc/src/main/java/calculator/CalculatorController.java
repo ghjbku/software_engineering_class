@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.util.Arrays;
+
 public class CalculatorController {
 
     @FXML
@@ -13,8 +15,10 @@ public class CalculatorController {
 
     private Calculator calculator;
     private boolean startNumber = true;
-    private double number1;
+    private float number1;
     private String operator = "";
+    private boolean float_used=false;
+    private int c_number=0;
 
     @FXML
     private void initialize() {
@@ -41,17 +45,34 @@ public class CalculatorController {
            if (operator.isEmpty()) {
                return;
            }
-           double number2 = Double.parseDouble(display.getText());
-           double result = calculator.calculate(number1, number2, operator);
-           display.setText(String.format("%.0f", result));
+           float number2 = Float.parseFloat(display.getText());
+           float result = (float) calculator.calculate(number1, number2, operator);
+
+            result_display(result,number2);
+
            operator = "";
         } else {
             if (! operator.isEmpty()) {
                 return;
             }
-            number1 = Double.parseDouble(display.getText());
+            number1 =Float.parseFloat(display.getText());
             operator = operatorPressed;
             startNumber = true;
+        }
+    }
+
+    private void result_display(float result,float number2){
+        if (float_used){
+            String[] arrOfStr= String.valueOf(number1).split("[.]",2);
+            String[] arrOfStr2= String.valueOf(number2).split("[.]",2);
+
+            c_number=Math.max(arrOfStr[1].length(),arrOfStr2[1].length());
+            display.setText(String.format("%."+c_number+"f", result));
+
+        }
+        else{
+            c_number=0;
+            display.setText(String.format("%."+c_number+"f", result));
         }
     }
 
@@ -60,6 +81,7 @@ public class CalculatorController {
         System.out.println("delete");
         display.setText("0");
         startNumber=true;
+        float_used=false;
     }
     @FXML
     public void SignumChange(){
@@ -71,8 +93,16 @@ public class CalculatorController {
         else{
             display.setText("-"+display.getText());
         }
-
-
     }
+        @FXML
+        public void floatpoint()
+        {
+            float_used=true;
+            System.out.println("float init");
+            display.setText(display.getText().concat("."));
+        }
+
+
+
 
 }
